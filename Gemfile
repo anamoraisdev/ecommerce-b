@@ -65,3 +65,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise", "~> 4.9"
+gem "sassc-rails"
+gem 'rails_admin', '~> 3.0'
+gem "cssbundling-rails"
+gem 'aws-sdk-s3', '~> 1.143'
