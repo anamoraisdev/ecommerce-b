@@ -71,3 +71,5 @@ gem "sassc-rails"
 gem 'rails_admin', '~> 3.0'
 gem "cssbundling-rails"
 gem 'aws-sdk-s3', '~> 1.143'
+
+gem 'rack-cors'
