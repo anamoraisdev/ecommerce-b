@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.1].define(version: 2024_01_31_232511) do
-
+ActiveRecord::Schema[7.1].define(version: 2024_04_18_144841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +60,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_232511) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "collection_of_products", force: :cascade do |t|
+    t.string "name"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_collection_of_products_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -69,7 +75,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_232511) do
     t.bigint "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "collection_of_product_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["collection_of_product_id"], name: "index_products_on_collection_of_product_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -84,6 +92,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_232511) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "variantes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collection_of_products", "products"
+  add_foreign_key "products", "collection_of_products"
 end
